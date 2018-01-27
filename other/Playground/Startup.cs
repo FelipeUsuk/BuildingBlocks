@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BuildingBlocks.Autofac;
-using BuildingBlocks.Core;
 using BuildingBlocks.Idempotency;
 using BuildingBlocks.Mediatr.Autofac;
 using BuildingBlocks.Mediatr.Exceptions;
 using BuildingBlocks.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Playground.Application;
 
@@ -28,6 +23,8 @@ namespace Playground
 
             services
                 .AddApplication<InMemoryRequestManager>()
+                .AddCustomIdentity(ApiInfo.Instance)
+                .AddPermissiveCors()
                 .AddCustomSwagger(ApiInfo.Instance);
 
             return services.ConvertToAutofac(
@@ -36,9 +33,11 @@ namespace Playground
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseMvcWithDefaultRoute();
-            app.UseCustomSwagger(ApiInfo.Instance);
             app.UseApplication();
+            app.UsePermissiveCors();
+            app.UseCustomSwagger(ApiInfo.Instance);
+            app.UseAuthentication();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

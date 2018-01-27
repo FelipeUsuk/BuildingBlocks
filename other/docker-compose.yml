@@ -6,3 +6,16 @@ services:
     build:
       context: .
       dockerfile: Playground/Dockerfile
+    depends_on:
+      - identity.web
+
+  identity.web:
+    image: identity.web
+    build:
+      context: .
+      dockerfile: Identity.Web/Dockerfile
+    depends_on:
+      - identities.data
+    
+  identities.data:
+    image: ravendb/ravendb

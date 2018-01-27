@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BuildingBlocks.Autofac\BuildingBlocks.Autofac.csproj" />
     <ProjectReference Include="..\..\src\BuildingBlocks.Mediatr\BuildingBlocks.Mediatr.csproj" />
+    <ProjectReference Include="..\..\src\BuildingBlocks.Mvc\BuildingBlocks.Mvc.csproj" />
     <ProjectReference Include="..\..\src\BuildingBlocks.Swagger\BuildingBlocks.Swagger.csproj" />
     <ProjectReference Include="..\Playground.Application\Playground.Application.csproj" />
   </ItemGroup>

@@ -3,11 +3,13 @@ using System.Net;
 using System.Threading.Tasks;
 using BuildingBlocks.Mediatr.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Playground.Application.CommandSide.Commands;
 
 namespace Playground.Features.Echo
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class EchoController : Controller
     {

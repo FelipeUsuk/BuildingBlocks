@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace BuildingBlocks.Mvc
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class SetupPermissiveCors
     {

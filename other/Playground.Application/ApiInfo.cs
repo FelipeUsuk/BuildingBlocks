@@ -9,14 +9,19 @@ namespace Playground.Application
     public class ApiInfo : IApiInfo
     {
         private ApiInfo() { }
-        public string AuthenticationAuthority => null;
-        public string JwtBearerAudience => null;
+        public string AuthenticationAuthority => "http://localhost:5000";
+        public string JwtBearerAudience => "playground";
         public string Code => "building.blocks.playground";
         public string Title => "Building Blocks Playground";
         public string Version => "V1";
         public Assembly ApplicationAssembly => GetType().Assembly;
-        public IDictionary<string, string> Scopes => null;
-        public SwaggerAuthInfo SwaggerAuthInfo => null;
+
+        public IDictionary<string, string> Scopes => new Dictionary<string, string>
+        {
+            {"playground", Title}
+        };
+
+        public SwaggerAuthInfo SwaggerAuthInfo => new SwaggerAuthInfo("playgroundswaggerui", "", "");
        
         private static readonly Lazy<ApiInfo> _instance 
             = new Lazy<ApiInfo>(() => new ApiInfo());
