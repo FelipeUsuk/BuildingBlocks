@@ -19,8 +19,5 @@ namespace Identity.Web.Features.Account
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        
-        [Display(Name = "Is Backoffice?")]
-        public bool IsBackoffice { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Identity.Application;
+﻿using System;
+using BuildingBlocks.Mediatr.Autofac;
+using Identity.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,11 +17,15 @@ namespace Identity.Web
             _configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityApplication(_configuration);
             services.AddMvc();
             services.AddFeatureFoldersSupport();
+
+            return services.ConvertToAutofac(
+                MediatrModule.Create(typeof(Application.Startup).Assembly)
+            );
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

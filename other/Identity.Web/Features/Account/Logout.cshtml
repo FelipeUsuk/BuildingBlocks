@@ -1,7 +1,7 @@
-﻿@using Identity.Web.Features.Account
-@model Identity.Web.Features.Account.LogoutViewModel
+﻿@model Identity.Application.QuerySide.Queries.LogoutInfo
 
 @{
+    ViewBag.Title = "Logout";
     ViewBag.Title = "Logout";
 }
 
@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <p>Would you like to logout of Databoff Identity?</p>
+            <p>Would you like to logout?</p>
             <form asp-action="Logout">
                 <input type="hidden" name="logoutId" value="@Model.LogoutId" />
                 <fieldset>

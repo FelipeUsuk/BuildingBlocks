@@ -2,9 +2,8 @@
 using Autofac;
 using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace BuildingBlocks.Autofac
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class Startup
     {

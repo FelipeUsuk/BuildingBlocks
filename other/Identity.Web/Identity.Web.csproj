@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\BuildingBlocks.Mediatr\BuildingBlocks.Mediatr.csproj" />
     <ProjectReference Include="..\..\src\BuildingBlocks.Mvc\BuildingBlocks.Mvc.csproj" />
     <ProjectReference Include="..\Identity.Application\Identity.Application.csproj" />
   </ItemGroup>

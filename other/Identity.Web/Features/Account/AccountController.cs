@@ -2,6 +2,10 @@
 using System.Threading.Tasks;
 using BuildingBlocks.AspnetCoreIdentity.RavenDB;
 using Identity.Application;
+using Identity.Application.CommandSide.Commands;
+using Identity.Application.Features.Account;
+using Identity.Application.QuerySide.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,30 +17,20 @@ namespace Identity.Web.Features.Account
     public class AccountController 
         : Controller
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly AccountService _accountService;
-        private readonly ILogger<AccountController> _logger;
+        private readonly IMediator _mediator;
 
         public AccountController(
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            ILoggerFactory loggerFactory,
-            AccountService accountService
+            IMediator mediator
             )
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _accountService = accountService;
-            _logger = loggerFactory.CreateLogger<AccountController>();
+            _mediator = mediator;
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation(4, "User logged out.");
+            await _mediator.Send(new LogoffCommand());
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
@@ -44,29 +38,22 @@ namespace Identity.Web.Features.Account
         [AllowAnonymous]
         public async Task<IActionResult> Logout(string logoutId)
         {
-            var vm = await _accountService.BuildLogoutInfoAsync(logoutId);
-
-            if (vm.ShowLogoutPrompt == false)
+            var result = await _mediator.Send(new LogoutInfoQuery(logoutId));
+            if (result.ShowLogoutPrompt == false)
             {
-                // if the request for logout was properly authenticated from IdentityServer, then
-                // we don't need to show the prompt and can just log the user out directly.
-                return await Logout(vm);
+                return await Logout(result);
             }
-
-            return View(vm);
+            return View(result);
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout(AccountService.LogoutInfo model)
+        public async Task<IActionResult> Logout(LogoutInfo model)
         {
-            var vm = await _accountService.BuildLoggedOutViewModelAsync(model.LogoutId);
-
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-
-            return Redirect(vm.PostLogoutRedirectUri);
+            var result = await _mediator.Send(new LoggedOutInfoQuery(model.LogoutId));
+            await _mediator.Send(new LogoffCommand());
+            return Redirect(result.PostLogoutRedirectUri);
         }
 
         [HttpGet]
@@ -85,26 +72,17 @@ namespace Identity.Web.Features.Account
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var user = new User { Name = model.Name };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded && model.IsBackoffice)
-                {
-                    result = await _userManager.AddClaimAsync(user, new Claim("IsBackoffice", "true"));
-                }
 
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
-                }
+            var result = await _mediator.Send(new RegisterCommand(
+                model.Name, model.Password));
+
+            if (!result.Succeeded)
+            {
                 AddErrors(result);
+                return View(model);
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return RedirectToLocal(returnUrl);
         }
 
         //
@@ -125,20 +103,18 @@ namespace Identity.Web.Features.Account
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(model.Name, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
-                }
+            if (!ModelState.IsValid) return View(model);
 
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View(model);
+            var result = await _mediator.Send(
+                new LoginCommand(model.Name, model.Password, model.RememberMe)
+            );
+
+            if (result)
+            {
+                return RedirectToLocal(returnUrl);
             }
 
-            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return View(model);
         }
 

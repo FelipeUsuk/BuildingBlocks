@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
@@ -15,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BuildingBlocks.AspnetCoreIdentity.RavenDB\BuildingBlocks.AspnetCoreIdentity.RavenDB.csproj" />
     <ProjectReference Include="..\..\src\BuildingBlocks.IdentityServer4.RavenDB\BuildingBlocks.IdentityServer4.RavenDB.csproj" />
+    <ProjectReference Include="..\..\src\BuildingBlocks.Mediatr\BuildingBlocks.Mediatr.csproj" />
   </ItemGroup>
 
 </Project>

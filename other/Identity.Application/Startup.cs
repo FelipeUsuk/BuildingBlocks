@@ -65,7 +65,6 @@ namespace Identity.Application
                 .AddAspNetIdentity<User>()
                 .AddProfileService<ProfileService>();
 
-            services.AddScoped<AccountService>();
             return services;
         }
 

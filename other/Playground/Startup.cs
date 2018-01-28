@@ -1,5 +1,4 @@
 ﻿using System;
-using BuildingBlocks.Autofac;
 using BuildingBlocks.Core;
 using BuildingBlocks.Idempotency;
 using BuildingBlocks.Mediatr.Autofac;
@@ -40,17 +39,14 @@ namespace Playground
                 );
         }
         public void Configure(
-            IApplicationBuilder app, 
+            IApplicationBuilder app,
             IHostingEnvironment env,
-            IApiInfo apiInfo)
-        {
-            app.UseDeveloperExceptionPage();
-
-            app.UseApplication();
-            app.UsePermissiveCors();
-            app.UseCustomSwagger(apiInfo);
-            app.UseAuthentication();
-            app.UseMvcWithDefaultRoute();
-        }
+            IApiInfo apiInfo) => app
+                .UseDeveloperExceptionPage()
+                .UseApplication()
+                .UsePermissiveCors()
+                .UseCustomSwagger(apiInfo)
+                .UseAuthentication()
+                .UseMvcWithDefaultRoute();
     }
 }
