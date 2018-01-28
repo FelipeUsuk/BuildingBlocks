@@ -14,6 +14,7 @@ namespace BuildingBlocks.Core
 
         IDictionary<string, string> Scopes { get; }
         SwaggerAuthInfo SwaggerAuthInfo { get; }
+        
     }
 
     public class SwaggerAuthInfo
@@ -22,7 +23,11 @@ namespace BuildingBlocks.Core
         public string Secret { get; }
         public string Realm { get;  }
 
-        public SwaggerAuthInfo(string clientId, string secret, string realm)
+        public SwaggerAuthInfo(
+            string clientId, 
+            string secret, 
+            string realm
+            )
         {
             ClientId = clientId;
             Secret = secret;

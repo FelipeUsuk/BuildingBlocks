@@ -1,15 +1,17 @@
 ﻿using BuildingBlocks.Core;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace Playground.Application
 {
     public class ApiInfo : IApiInfo
     {
-        private ApiInfo() { }
-        public string AuthenticationAuthority => "http://localhost:5000";
+        private ApiInfo(IConfiguration config)
+        {
+            AuthenticationAuthority = config["AuthenticationAuthority"];
+        }
+        public string AuthenticationAuthority { get; }
         public string JwtBearerAudience => "playground";
         public string Code => "building.blocks.playground";
         public string Title => "Building Blocks Playground";
@@ -21,10 +23,15 @@ namespace Playground.Application
             {"playground", Title}
         };
 
-        public SwaggerAuthInfo SwaggerAuthInfo => new SwaggerAuthInfo("playgroundswaggerui", "", "");
-       
-        private static readonly Lazy<ApiInfo> _instance 
-            = new Lazy<ApiInfo>(() => new ApiInfo());
-        public static ApiInfo Instance => _instance.Value;
-    }
+        public SwaggerAuthInfo SwaggerAuthInfo => new SwaggerAuthInfo(
+            "playgroundswaggerui", "", ""
+            );
+
+        public static IApiInfo Instantiate(IConfiguration config)
+        {
+            Instance = new ApiInfo(config);
+            return Instance;
+        }
+        public static IApiInfo Instance { get; private set; }
+   }
 }

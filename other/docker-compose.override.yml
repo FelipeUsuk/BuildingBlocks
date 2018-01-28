@@ -4,12 +4,15 @@ services:
   playground:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - AuthenticationAuthority=http://10.0.75.1:5000
     ports:
       - "5001:80"
 
   identity.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
       - PlaygroundApi=http://localhost:5001
       - RavenDbUrl=http://identities.data:8080
       - RavenDbDatabase=Identities

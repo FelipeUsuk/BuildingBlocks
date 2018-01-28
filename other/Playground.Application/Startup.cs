@@ -1,6 +1,7 @@
 ﻿using BuildingBlocks.Core;
 using BuildingBlocks.Idempotency;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Playground.Application
@@ -8,12 +9,12 @@ namespace Playground.Application
     public static class Startup
     {
         public static IServiceCollection AddApplication<TRequestManager>(
-            this IServiceCollection services
+            this IServiceCollection services, IConfiguration configuration
         ) where TRequestManager : class, IRequestManager
         {
             return services
                 .AddSingleton<IRequestManager, TRequestManager>()
-                .AddSingleton<IApiInfo>(ApiInfo.Instance);
+                .AddSingleton(ApiInfo.Instantiate(configuration));
         }
 
         public static IApplicationBuilder UseApplication(
