@@ -31,13 +31,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlaygroundService", "Playgr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{8AF5D4F1-06C6-4D9C-808F-A98FA6B00542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Web", "other\Identity.Web\Identity.Web.csproj", "{256110C6-374A-44C5-860C-7F717B542681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Web", "other\Identity.Web\Identity.Web.csproj", "{256110C6-374A-44C5-860C-7F717B542681}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Application", "other\Identity.Application\Identity.Application.csproj", "{8266F4AD-1288-4B9E-9A24-98D51564A063}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Application", "other\Identity.Application\Identity.Application.csproj", "{8266F4AD-1288-4B9E-9A24-98D51564A063}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.IdentityServer4.RavenDB", "src\BuildingBlocks.IdentityServer4.RavenDB\BuildingBlocks.IdentityServer4.RavenDB.csproj", "{91C1F84A-15D1-4596-9BF3-464988B739AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks.IdentityServer4.RavenDB", "src\BuildingBlocks.IdentityServer4.RavenDB\BuildingBlocks.IdentityServer4.RavenDB.csproj", "{91C1F84A-15D1-4596-9BF3-464988B739AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.AspnetCoreIdentity.RavenDB", "src\BuildingBlocks.AspnetCoreIdentity.RavenDB\BuildingBlocks.AspnetCoreIdentity.RavenDB.csproj", "{A5D7048A-756E-46F1-BA5A-7CC4FA6A25CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks.AspnetCoreIdentity.RavenDB", "src\BuildingBlocks.AspnetCoreIdentity.RavenDB\BuildingBlocks.AspnetCoreIdentity.RavenDB.csproj", "{A5D7048A-756E-46F1-BA5A-7CC4FA6A25CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Web", "other\Playground.Web\Playground.Web.csproj", "{87A3BC61-D820-411B-AB87-34B531FB8518}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{A5D7048A-756E-46F1-BA5A-7CC4FA6A25CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D7048A-756E-46F1-BA5A-7CC4FA6A25CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D7048A-756E-46F1-BA5A-7CC4FA6A25CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87A3BC61-D820-411B-AB87-34B531FB8518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A3BC61-D820-411B-AB87-34B531FB8518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A3BC61-D820-411B-AB87-34B531FB8518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A3BC61-D820-411B-AB87-34B531FB8518}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{8266F4AD-1288-4B9E-9A24-98D51564A063} = {8AF5D4F1-06C6-4D9C-808F-A98FA6B00542}
 		{91C1F84A-15D1-4596-9BF3-464988B739AB} = {0219332F-4EB1-4036-9960-D2E1F921F454}
 		{A5D7048A-756E-46F1-BA5A-7CC4FA6A25CC} = {0219332F-4EB1-4036-9960-D2E1F921F454}
+		{87A3BC61-D820-411B-AB87-34B531FB8518} = {A0134598-514D-47BD-9C9C-D8CCD78FBD67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03F10F18-BED4-45E5-A771-8E257E384EC1}

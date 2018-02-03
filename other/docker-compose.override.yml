@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  playground.web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - AuthenticationAuthority=http://10.0.75.1:5000
+      - PlaygroundService=http://playground
+    ports:
+      - "5002:80"
+
   playground:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -14,11 +23,18 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - PlaygroundApi=http://localhost:5001
+      - PlaygroundWeb=http://localhost:5002
       - RavenDbUrl=http://identities.data:8080
       - RavenDbDatabase=Identities
     ports:
       - "5000:80"
 
   identities.data:
+    environment:
+      - RAVEN_ARGS='--Setup.Mode=None'
+      - RAVEN_Security_UnsecuredAccessAllowed='PrivateNetwork'
+    volumes:
+      - ./data:/opt/RavenDB/Server/RavenData
     ports:
       - "8080:8080"
+

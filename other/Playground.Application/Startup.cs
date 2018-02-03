@@ -1,5 +1,4 @@
-﻿using BuildingBlocks.Core;
-using BuildingBlocks.Idempotency;
+﻿using BuildingBlocks.Idempotency;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

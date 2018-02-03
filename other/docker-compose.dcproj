@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>618c4ae0-8691-4c89-abb4-24c19e13779b</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
-    <DockerServiceUrl>http://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:5002</DockerServiceUrl>
     <DockerServiceName>playground</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

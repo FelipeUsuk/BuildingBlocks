@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using BuildingBlocks.AspnetCoreIdentity.RavenDB;
 using Identity.Application.Setup;
 using IdentityServer4.Models;

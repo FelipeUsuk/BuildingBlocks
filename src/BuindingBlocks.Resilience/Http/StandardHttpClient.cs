@@ -30,6 +30,12 @@ namespace BuindingBlocks.Resilience.Http
                 .Apply(authorization);
 
             var response = await _httpClient.SendAsync(message, cancellationToken);
+
+            if (response.StatusCode == HttpStatusCode.InternalServerError)
+            {
+                throw new HttpRequestException();
+            }
+
             return await response.Content.ReadAsStringAsync();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BuildingBlocks.IdentityServer4.RavenDB.Stores;
+using IdentityServer4;
 using IdentityServer4.Models;
 using Microsoft.Extensions.Configuration;
 
@@ -38,7 +39,39 @@ namespace Identity.Application.Setup
                     "playground"
                 },
                 RequireConsent = false
-            } 
+            },
+
+            new Client
+            {
+                ClientId = "playgroundweb",
+                ClientName = "PlaygroundWeb",
+                ClientSecrets = new List<Secret>
+                {
+                    new Secret("secret".Sha256())
+                },
+                ClientUri = $"{clientsUrl["PlaygroundWeb"]}",                             // public uri of the client
+                AllowedGrantTypes = GrantTypes.Hybrid,
+                AllowAccessTokensViaBrowser = false,
+                RequireConsent = false,
+                AllowOfflineAccess = true,
+                AlwaysIncludeUserClaimsInIdToken = true,
+                RedirectUris = new List<string>
+                {
+                    $"{clientsUrl["PlaygroundWeb"]}/signin-oidc"
+                },
+                PostLogoutRedirectUris = new List<string>
+                {
+                    $"{clientsUrl["PlaygroundWeb"]}/signout-callback-oidc"
+                },
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                    "playground",
+                }
+                
+            }
         };
 
         public static async Task LoadSeed(
@@ -67,7 +100,8 @@ namespace Identity.Application.Setup
             {
                 var urls = new Dictionary<string, string>
                 {
-                    {"PlaygroundApi", configuration["PlaygroundApi"]}
+                    {"PlaygroundApi", configuration["PlaygroundApi"]},
+                    {"PlaygroundWeb", configuration["PlaygroundWeb"]}
                 };
 
                 foreach (var client in GetClients(urls))

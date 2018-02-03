@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  playground.web:
+    image: playground.web
+    build:
+      context: .
+      dockerfile: Playground.Web/Dockerfile
+    depends_on:
+      - playground
+      - identity.web
+
   playground:
     image: playground
     build:
@@ -14,8 +23,7 @@ services:
     build:
       context: .
       dockerfile: Identity.Web/Dockerfile
-    depends_on:
-      - identities.data
-    
+
   identities.data:
     image: ravendb/ravendb
+ 
