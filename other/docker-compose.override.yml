@@ -22,7 +22,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
-      - PlaygroundApi=http://localhost:5001
+      - PlaygroundService=http://localhost:5001
       - PlaygroundWeb=http://localhost:5002
       - RavenDbUrl=http://identities.data:8080
       - RavenDbDatabase=Identities

@@ -17,6 +17,7 @@ namespace Identity.Web
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseHealthChecks("/hc")
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {

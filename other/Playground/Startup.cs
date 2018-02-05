@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
 using Playground.Application;
 
 namespace Playground
@@ -27,6 +28,11 @@ namespace Playground
                 {
                     options.Filters.Add(typeof(HttpGlobalExceptionFilter));
                 });
+
+            services.AddHealthChecks(checks =>
+            {
+                checks.AddUrlCheck($"{Configuration["AuthenticationAuthority"]}/hc");
+            });
 
             services
                 .AddApplication<InMemoryRequestManager>(Configuration)

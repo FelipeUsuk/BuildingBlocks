@@ -23,6 +23,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BuildingBlocks.Mediatr\BuildingBlocks.Mediatr.csproj" />
     <ProjectReference Include="..\..\src\BuildingBlocks.Mvc\BuildingBlocks.Mvc.csproj" />
+    <ProjectReference Include="..\..\submodules\HealthChecks\src\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\submodules\HealthChecks\src\Microsoft.Extensions.HealthChecks\Microsoft.Extensions.HealthChecks.csproj" />
     <ProjectReference Include="..\Identity.Application\Identity.Application.csproj" />
   </ItemGroup>
 

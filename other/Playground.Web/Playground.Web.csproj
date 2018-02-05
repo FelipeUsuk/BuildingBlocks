@@ -14,6 +14,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BuildingBlocks.Mvc\BuildingBlocks.Mvc.csproj" />
     <ProjectReference Include="..\..\src\BuindingBlocks.Resilience\BuindingBlocks.Resilience.csproj" />
+    <ProjectReference Include="..\..\submodules\HealthChecks\src\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\submodules\HealthChecks\src\Microsoft.Extensions.HealthChecks\Microsoft.Extensions.HealthChecks.csproj" />
   </ItemGroup>
 
 </Project>

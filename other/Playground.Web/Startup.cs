@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Playground.Web.Services;
 using Polly;
@@ -29,6 +30,12 @@ namespace Playground.Web
         {
             services.AddMvc();
             services.AddFeatureFoldersSupport();
+
+            services.AddHealthChecks(checks =>
+                {
+                    checks.AddUrlCheck($"{_configuration["AuthenticationAuthority"]}/hc");
+                    checks.AddUrlCheck($"{_configuration["PlaygroundService"]}/hc");
+                });
 
             services.AddAuthentication(options => {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

@@ -31,8 +31,8 @@ namespace Identity.Application.Setup
                 AllowedGrantTypes = GrantTypes.Implicit,
                 AllowAccessTokensViaBrowser = true,
 
-                RedirectUris = { $"{clientsUrl["PlaygroundApi"]}/swagger/o2c.html" },
-                PostLogoutRedirectUris = { $"{clientsUrl["PlaygroundApi"]}/swagger/" },
+                RedirectUris = { $"{clientsUrl["PlaygroundService"]}/swagger/o2c.html" },
+                PostLogoutRedirectUris = { $"{clientsUrl["PlaygroundService"]}/swagger/" },
 
                 AllowedScopes =
                 {
@@ -100,7 +100,7 @@ namespace Identity.Application.Setup
             {
                 var urls = new Dictionary<string, string>
                 {
-                    {"PlaygroundApi", configuration["PlaygroundApi"]},
+                    {"PlaygroundApi", configuration["PlaygroundService"]},
                     {"PlaygroundWeb", configuration["PlaygroundWeb"]}
                 };
 

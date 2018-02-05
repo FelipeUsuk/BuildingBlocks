@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using BuildingBlocks.Mediatr.Autofac;
 using Identity.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 
 namespace Identity.Web
@@ -21,6 +23,13 @@ namespace Identity.Web
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityApplication(_configuration);
+
+            services.AddHealthChecks(checks =>
+            {
+                checks.AddValueTaskCheck("HTTP Endpoint", () => new
+                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
+            });
+
             services.AddMvc();
             services.AddFeatureFoldersSupport();
 
